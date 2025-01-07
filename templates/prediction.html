@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Predicción del cultivo</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-color: #f2f2f2;
+    }
+ .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Predicción del cultivo 🌾</h1>
+    <form id="city-form">
+      <label for="city-input">Ingrese la ciudad: 📍</label>
+      <input id="city-input" type="text" placeholder="Ej. Tijuana">
+      <button id="city-button" class="btn btn-primary">Obtener predicción</button>
+    </form>
+    <div id="prediction-log"></div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      // Configuración de la predicción del cultivo
+      const cityForm = $('#city-form');
+      const cityInput = $('#city-input');
+      const cityButton = $('#city-button');
+      const predictionLog = $('#prediction-log');
+
+      // Función para obtener la predicción del cultivo
+      cityButton.click(function() {
+        const city = cityInput.val();
+        $.ajax({
+          type: 'POST',
+          url: '/search_city',
+          data: { city_name: city },
+          success: function(response) {
+            const coordinates = response.coordinates;
+            const prediction = response.prediction;
+            predictionLog.html(`Coordenadas: ${coordinates[0]}, ${coordinates[1]}<br>Predicción: ${prediction}`);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
