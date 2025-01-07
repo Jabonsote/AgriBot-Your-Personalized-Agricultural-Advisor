@@ -105,10 +105,6 @@ Agriculture is highly influenced by environmental factors such as temperature, h
 
 ---
 
-## 🎥 **Demo**
-
-![Application Workflow](image/presentation.gif)
-
 ---
 
 ## 📝 **How to Run the Project**
